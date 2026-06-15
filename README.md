@@ -235,4 +235,35 @@ C 언어의 자료형은 크게 세가지로 나눌 수 있다.
     unsigned char d;
 
 2. 열거형 :  
+나열된 단어를 정수 값처럼 사용하는 자료형이다.  
+이전, C#언어 공부하면서 배운 enum 과 같다.
+
+        enum day {SUN, MON, TUE, WED, THU, FRI, SAT };
+    기보적으로 0 부터 시작되며, array[0] 이랑 비슷한 느낌이라 볼 수 있다.  
+    즉, SUN = 0, MON = 1, TUE = 2, ... , SAT = 6 이 되겠다.
+
+    특벌한 방식도 있다. 
+
+        enum fruit {APPLE, PEAR, MANGO = 4,GRAPE};
+    이 경우에는 APPLE = 0, PEAR - 1, MANGI = 4, GRAPE = 5 가 된다.
+
+    이걸 좀 더 예를 들자면, 
+
+        #include<stdio.h>
+        int main(void)
+        {
+            enum day {SUN, MON, TUE, WED, THU,FRI, SAT};
+            enum fruit {APPLE, PEAR, MANGO = 4, GRAPE};
+
+            printf("TUE의 값 = %d\n", TUE);
+            printf("PEAR의 값 = %d\n", PEAR);
+            printf("GRAPE의 값 = %d\n",GRAPE);
+
+            return 0;
+        }
+
+    TUE의 값 = 2  
+    PEAR의 값 = 1  
+    GRAPE의 값 = 5
+
 3. 파생형 :  
