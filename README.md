@@ -274,4 +274,276 @@ C 언어의 자료형은 크게 세가지로 나눌 수 있다.
 
 ---
 
-일단은... 피곤하니 오늘 공부는 여기까지...
+일단은... 피곤하니 오늘 공부는 여기까지...  
+이어서.
+
+12. 기본 자료형
+
+|분류|자료형|설명|
+|---|---|---|
+|정수형|short, int, long, long long|정수 저장|
+|문자형|char|문자 1개 저장|
+|실수형|float, double, long double|소수점이 있는 수 저장|
+
+이 의미는  
+1. 어떤 값을 저장할 수 있는가
+2. 메모리를 얼마나 사용하는가
+3. 어떤 연산을 할 수 있는가  
+이다.
+
+---
+13. 정수형과 signed/unsigned
+
+정수형은 말 그대로 정수(integer)를 저장하는 자료형이다.
+
+    int age = 33;
+    long long money = 10000000;
+정수형은 크게 signed 와 unsigned 로 나눌 수 있는데, 
+
+|signed|unsigned|
+|---|---|
+|signed|양수, 음수, 0 저장 가능|
+|unsigned|0과 양수만 저장 가능|
+
+으로 정수형은 signed 가 기본값이다.
+
+    int a = -10;            // 0포함, 모든 정수 저장
+    unsigned int b = 10;    // 0과 양수만 저장
+
+
+
+정수형의 범위는 <limits.h>에 정의된 값을 통해 확인할 수 있다.
+
+    #include<stdio.h>
+    #include<limits.h>
+
+    int main(void)
+    {
+        printf("int 최소값 = %d\n", INT_MIN);
+        printf("int 최대값 = %d\n", INT_MAX);
+        return 0;
+    }
+
+---
+
+14. 문자형 char
+문자를 저장하는 자료형이다.
+
+        char ch = 'A';
+    문자는 ' '로 표현하며,  
+    C언어에서 문자는 ASCII 코드 값으로 저장된다.
+
+        #include<stdio.h>
+        int main(void)
+        {
+            char ch = 'A';
+
+            printf("문자 = %c\n", ch);
+            printf("ACKII 코드 = %d\n", ch);
+            return 0;
+        }
+    문자 = A  
+    ASCII 코드 = 65  
+    가 출력된다.
+
+    즉 'A'는 문자처럼 보이면서도 내부적으로는 숫자 65로 저장된다.
+
+---
+
+15. 실수형 자료형 flaoting
+소수점이 있는 수를 저장한다.
+
+|자료형|설명|
+|---|---|
+|float|작은 범위의 실수|
+|double|일반적으로 가장 많이 사용하는 실수형|
+|long double|더 큰 범위의 실수령|
+
+C언어에서 실수 상수는 기본적으로 double 로 처리된다.  
+float 로 사용하려면 뒤에 f를 붙인다. 이는 c#의 문법과 같다.
+
+    double a = 3.14;
+    float b = 3.14f;
+
+실수형의 범위는 <float.h>에 정의된 값을 통해 확인할 수 있다.
+
+    #include <stdio.h>
+    #include <float.h>
+
+    int main(void)
+    {
+        printf("double 최소값 = %e\n", DBL_MIN);
+        printf("double 최대값 = %e\n", DBL_MAX);
+
+        return 0;
+    }
+---
+
+16. 열거형 enum
+열거형은 이름에 정수 값을 붙여 사용하는 자료형이다.
+기본적으로는 0부터 시작한다.
+
+        enum day{SUN, MON, TUE, WED, THU, FRI, SAT};
+    각 값은
+    
+        SUN = 0
+        MON = 1
+        TUE = 2
+        WED = 3
+        THU = 4
+        FRI = 5
+        SAT = 6
+    을 기본으로 중간에 값을 직접 지정할 수도 있다.
+
+        enum = fruit {APPLE, PEAR, MANGO = 4, GRAPE};
+    이 경우에는
+
+        APPLE = 0
+        PEAR = 1
+        MANGO = 4
+        GRAPE = 5
+
+    열거형은 특히 위에서 한번 설명했던 내용이며, 관련예시를 다시 보자면, 
+        
+        #include<stdio.h>
+        int main(void)
+        {
+            enum day {SUN, MON, TUE, WED, THU, FRI, SAT};
+            enum = fruit {APPLE, PEAR, MANGO = 4, GRAPE};
+
+            printf("TUE = %d\n", TUE);
+            printf("PEAR = %d\n", PEAR);
+            printf("GRAPE = %d\n", GRAPE);
+
+            return 0;
+        }
+
+
+---
+17. 상수
+상수란, 늘 항상 고정된 수를 의미하고 C언어에서는 항상 고정된 값을 가지는 자료 이다.
+
+예를 들어보자.  
+내 이름은 Sue 이다. 그러면 이 Sue 라는 이름은 고정된 값인 것이다.
+
+- 정수형 상수
+
+|구분|예|특징|
+|---|---|---|
+|10진수|12,-45|일반정수|
+|8진수|012|0으로 시작|
+|16진수|0x0c|0x또는 0X로 시작|
+|unsigned|10u|부호 없는 정수|
+|long|12345L|long형 정수|
+  
+
+- 실수형 상수
+
+|구분|예|
+|---|---|
+|소수 형식|3.14, -12.345|
+|지수 형식|1.2e3, 5e-2|
+|float형|3.14f|
+|long double형|3.14L|
+
+---
+
+18. 문자 상수와 문자열 상수
+문자 상수는 ' '를 사용한다.
+    
+        'A'
+
+문자열 상수는 " "를 사용한다.
+
+        "A"
+        "SUE"
+        "KOREA"
+문자와 문자열은 다르다.
+
+'A' -> 문자 1개를 의미하고 ACKII 코드로 65를 의미한다.
+"A" -> 문자열, 문자 그 자체인 A 를 의미한다. 또한 \0이 자동으로 포함된다.
+
+그러면 이 다음에는 \0 을 의미하는 Escape 문자 에 대해 알아보자.
+
+---
+19. Escape 문자
+
+\ 를 사용해, 특수한 문자를 표현하는 방법이다.
+
+|Escape 문자 | 의미|
+|---|---|
+|\n|줄 바꿈|
+|\t|수평 탭|
+|\0||널 문자|
+|\'|작은 따옴표|
+|\"|큰 따옴표|
+|\\|| 백슬래시|
+
+    #include <stdio.h>
+
+    int main (void)
+    {
+        printf("Hello\nWorld\n");
+        printf("Name\tAge\n");
+        printf("Sue\t33\n");
+        printf("큰 따옴표 : \"Hello\"\n");
+        printf("백슬래시 : \\\n");
+
+        return 0;
+    }
+
+---
+20. 변수
+값을 저장하기 위한 메모리 공간이다.
+상수와는 달리 프로그램 실행 중 값이 바뀔 수 있다.
+
+        int age = 33;
+        age = 34;
+
+    특징 :  
+    1. 이름이 있다.
+    2. 자료형이다.
+    3. 값을 저장할 수 있다.
+    4. 사용하기 전, 선언해야 한다.
+
+    형식은  
+    자료형 변수명;
+
+        int a;
+        double b;
+        char ch
+
+        int x, y, z;
+    이런 식으로 한번에 여러개를 사용할 수도 있다.
+
+---
+
+21. 변수 선언과 초기화
+변수를 선언하면서 처음 값을 넣는 것을 초기화 라고 한다.
+
+        int age = 33;
+        double height = 170.4;
+        char grade = 'A';
+    초기화하지 않은 지역변수인 age, height 그리고 grade 에는 쓰레기값이 들어 있을 수 있다.  
+    따라서 변수는 가능한 한 처음부터 값(33, 170.4, A)을 넣어주는 것이 좋다.
+
+        #include<stdio.h>
+
+        int main(void)
+        {
+            int a = 3+2;
+            double b = a / 4.0;
+
+            printf("a = %e\n",a);
+            printf("b = %f\n",b);
+
+            return 0 ;
+        }
+    출력값은  
+
+        a = 5
+        b = 1.250000
+    4.0은 실수이므로 계산의 결과고 실수로 나온다.  
+    이 말은, 정수 +(-,*,/,%) 실수 로 계산하면 그 결과는 반드시 실수로 나오게 된다.
+
+---
