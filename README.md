@@ -1548,21 +1548,219 @@ C 언어에서는 이런 관계 연산의 결과는 보통 다음과 같다.
         result = 5
 ---
 
-그러면 이제와서 하는 말이지만  
-## 문장이란 무엇인가
-- 선언이나 실행을 지시하는 기본 단위다.
+14. 선택 제어문
+- 조건에 따라 실행할 코드를 선택한다.  
+대표적으로는 if 문과 switch 문이 있다.
 
-1. 선언문
-- 자료형이나 변수를 선언한다.
+if 문은 보통 else if 와 else 와 같이 사용하는데, 우선 if 문부터 봐보자.
 
-        int a;
+1. if 문
+- 조건이 참 일때만 특정 코드를 실행한다.
 
-2. 실행문
-- 실제 동작을 수행한다.
+        형식 :  
+        if(조건)
+        {
+            실행문;
+        }
 
-        a += 10;
+예시
+        
+        int score = 80;
+        if(score >=60)
+        {
+            printf(""합격입니다.\n);
+        }
 
-        int a = 10;
-        a++;
-        printf("%d\n", a);
+----
+        #include <stdio.h>
 
+        int main (void)
+        {
+            int a;
+            int b;
+
+            scanf("$d $d", &a, &b);
+
+            if (a < b)
+            {
+                int temp = a;
+                a = b;
+                b = temp;
+            }
+
+            printf("max = %d\n", a);
+            printf("min = %d\n", b);
+
+            return 0;
+        }
+
+        입력 값 : 10 20
+        처리방법 : a < b가 참이면 temp = 10이 되고, a = 20 그리고 b = 10이 된다.
+
+        출력 값 : max = 20
+        min = 10
+
+2. if -else 문
+- 조건이 참일 때와 거짓일 때 서로 다른 코드를 실행한다.
+
+        if(조건)
+        {
+            참일 때 실행;
+        }
+        else
+        {
+            거짓일 때 실행;
+        }
+
+
+        예시 : 
+        #include <stdio.h> 
+        int main(void) 
+        {
+            int number;
+            scanf("%d", &number);
+            
+            if (number % 2 == 0) 
+            { 
+                printf("짝수입니다.\n"); 
+            } 
+            else 
+            {
+                printf("홀수입니다.\n");
+            } 
+            
+            return 0;
+        }
+        입력 값 : 7
+        출력 값 : 홀수입니다.
+
+3. 중첩 if문
+- if 문 안에 또 다른 if 문을 작성할 수 있다.
+
+        #include <stdio.h> 
+        int main(void) 
+        { 
+            int number; 
+            scanf("%d", &number); 
+            
+            if (number >= 0) 
+            { 
+                if (number == 0) 
+                { 
+                    printf("0입니다.\n"); 
+                } 
+                else 
+                { 
+                    printf("양수입니다.\n"); 
+                } 
+            } 
+            else 
+            { 
+                printf("음수입니다.\n"); 
+            } 
+            return 0; 
+        }
+        입력 값 : 10
+        출력 값 : 양수입니다.
+        이유는 number >= 0 이면 참이고
+        number == 0 이면 거짓이기 때문이다.
+
+4. else if문
+- 여러 조건 중 하나를 선택할 때 사용한다.
+
+        형식 : 
+        if (조건1) 
+        { 
+            실행문1; 
+        } 
+        else if (조건2) 
+        { 
+            실행문2;
+        } 
+        else if (조건3) 
+        { 
+            실행문3; 
+        } 
+        else 
+        {
+            그 밖의 경우;
+        }
+        
+        위에서부터 조건을 검사하며, 처음 참이 된 블록 하나만 실행한다.
+
+---
+5. switch문
+- 하나의 값에 따라 여러 경우 중 하나를 선택한다.
+
+        형식 : 
+        switch (value)
+        {
+            case value1:
+                실행문;
+                break;
+
+            case value2:
+                실행문;
+                break;
+
+            default:
+                실행문;
+        }
+
+    ---
+
+        #include <stdio.h> 
+        int main(void) 
+        {
+            int menu; 
+            printf("메뉴를 선택하세요: "); 
+            scanf("%d", &menu); 
+             
+            switch (menu) 
+            { 
+                case 1: 
+                    printf("게임 시작\n"); 
+                    break; 
+                
+                case 2: 
+                    printf("설정\n"); 
+                    break; 
+                    
+                case 3: 
+                    printf("게임 종료\n"); break; 
+                    
+                default: 
+                    printf("잘못된 메뉴입니다.\n"); 
+            }
+            return 0;
+        }
+        입력 값 : 2
+        출력 값 : 설정
+
+---
+6. switch 문의 break
+- switch문을 종료한다.
+        
+        case 1: 
+            printf("게임 시작\n"); 
+            break; 
+        에서 break 가 없으면 다음 case 의 코드까지 실행된다.
+
+        switch (number)
+        {
+            case 1:
+                printf("one\n");
+
+            case 2:
+                printf("two\n");
+                break;
+        }
+        number 가 1이라는 가정하에, 
+        출력 값 : one
+                two
+            우리는 이러한 출력을 fall-through 라고 한다.
+
+        이것을 의도한 것이 아니라면 각 case 마지막에는 break 를 넣어줘야 한다.
+
+---
+7. if와 switch 비교
